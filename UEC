@@ -1,0 +1,52 @@
+package uec;
+import java.util.Scanner;
+
+public class UEC {
+
+	public static void main(String[] args) {
+		Scanner usuario = new Scanner (System.in);
+		int tamanhoVetor = 0, contador = 0;
+		System.out.print("Quantos lutadores serão cadastrados?");
+		tamanhoVetor = usuario.nextInt();
+		usuario.nextLine();
+		Lutador L[] = new Lutador [tamanhoVetor];
+		for (contador = 0; contador < tamanhoVetor; contador++) {
+			System.out.print("DIGITE O NOME DO " + (contador+1) + "º LUTADOR: ");
+			String nome = usuario.nextLine();
+			System.out.print("DIGITE O PAÍS DO LUTADOR: ");
+			String nacionalidade = usuario.nextLine();
+			System.out.print("DIGITE A IDADE DO LUTADOR: ");
+			int idade = usuario.nextInt();
+			usuario.nextLine();
+			System.out.print("DIGITE O PESO DO LUTADOR: ");
+			double peso = usuario.nextDouble();
+			usuario.nextLine();
+			System.out.print("DIGITE A ALTURA DO LUTADOR: ");
+			double altura = usuario.nextDouble();
+			usuario.nextLine();
+			System.out.print("DIGITE O NÚMERO DE VITÓRIAS DO LUTADOR: ");
+			int vitorias = usuario.nextInt();
+			usuario.nextLine();
+			System.out.print("DIGITE O NÚMERO DE EMPATES DO LUTADOR: ");
+			int empates = usuario.nextInt();
+			usuario.nextLine();
+			System.out.print("DIGITE O NÚMERO DE DERROTAS DO LUTADOR: ");
+			int derrotas = usuario.nextInt();
+			usuario.nextLine();
+			L[contador] = new Lutador(nome, nacionalidade, idade, peso, altura, vitorias, empates, derrotas);
+		}
+		
+		System.out.println("\nApresentação dos lutadores:");
+        for (Lutador lutador : L) {
+            lutador.apresentarLutador();
+            System.out.println("---------------------------");
+        }
+		
+        Luta UEC01 = new Luta();
+	    UEC01.marcarLuta(L[contador], L[contador+1]);
+	    UEC01.lutar();
+	    L[0].statusLutador();
+	    L[1].statusLutador();
+	}
+
+}

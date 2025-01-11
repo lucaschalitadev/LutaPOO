@@ -1,0 +1,82 @@
+package uec;
+import java.util.Random;
+
+public class Luta {
+	private Lutador desafiado;
+	private Lutador desafiante;
+	private int rounds;
+	private boolean aprovada;
+	
+	
+	public void setDesafiado (Lutador dd) {
+		this.desafiado = dd;
+	}
+	
+	public Lutador getDesafiado() {
+		return desafiado;
+	}
+	
+	public void setDesafiante (Lutador de) {
+		this.desafiante = de;
+	}
+	
+	public Lutador getDesafiante() {
+		return desafiante;
+	}
+	
+	public void setRounds (int round) {
+		this.rounds = round;
+	}
+	
+	public int getRounds () {
+		return rounds;
+	}
+	
+	public void setAprovada (boolean aprep) {
+		this.aprovada = aprep;
+	}
+	
+	public boolean getAprovada () {
+		return aprovada;
+	}
+	
+	public void marcarLuta(Lutador L1, Lutador L2) {
+		if ((L1.getCategoria() == L2.getCategoria()) && (L1 != L2)) {
+			this.aprovada = true;
+			this.desafiado = L1;
+			this.desafiante = L2;
+		} else {
+			this.aprovada = false;
+			this.desafiado = null;
+			this.desafiante = null;
+		}
+	}
+	
+	public void lutar() {
+		if (this.aprovada) {
+			System.out.println("=== O  D E S A F I A D O ===");
+			this.desafiado.apresentarLutador();
+			System.out.println("=== O  D E S A F I A N T E ===");
+			this.desafiante.apresentarLutador();
+			
+			Random resultadoAleatorio = new Random();
+			int vencedor = resultadoAleatorio.nextInt(3);
+			switch (vencedor) {
+				case 0: System.out.print("=== E M P A T E! ===");
+						this.desafiado.empatarLuta();
+						this.desafiante.empatarLuta();
+					break;
+				case 1: System.out.print("=== O  L U T A D O R   " + this.desafiado.getNome() + "   V E N C E U!===");
+						this.desafiado.ganharLuta();
+						this.desafiante.perderLuta();
+					break;
+				case 2: System.out.print("=== O  L U T A D O R   " + this.desafiante.getNome() + "   V E N C E U!===");
+						this.desafiado.perderLuta();
+						this.desafiante.ganharLuta();
+					break;
+			}
+		} else {
+			System.out.print("A luta não pode acontecer.");
+		}
+	}
+}
